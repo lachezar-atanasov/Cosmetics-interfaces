@@ -30,6 +30,8 @@ namespace Cosmetics.Core
                     return new CreateCategoryCommand(commandParameters, repository);
                 case nameof(CommandType.CreateShampoo):
                     return new CreateShampooCommand(commandParameters, repository);
+                case nameof(CommandType.CreateCream):
+                    return new CreateCreamCommand(commandParameters, repository);
                 case nameof(CommandType.CreateToothpaste):
                     return new CreateToothpasteCommand(commandParameters, repository);
                 case nameof(CommandType.AddToCategory):

@@ -6,6 +6,7 @@
         AddToShoppingCart,
         CreateCategory,
         CreateShampoo,
+        CreateCream,
         CreateToothpaste,
 		RemoveFromCategory,
         RemoveFromShoppingCart,

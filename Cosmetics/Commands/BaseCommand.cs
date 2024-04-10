@@ -60,5 +60,14 @@ namespace Cosmetics.Commands
             }
             throw new ArgumentException($"None of the enums in UsageType match the value {value}.");
         }
+
+        protected ScentType ParseScentType(string value)
+        {
+            if (Enum.TryParse(value, true, out ScentType result))
+            {
+                return result;
+            }
+            throw new ArgumentException($"None of the enums in UsageType match the value {value}.");
+        }
     }
 }

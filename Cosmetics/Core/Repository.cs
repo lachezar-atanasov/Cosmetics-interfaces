@@ -58,7 +58,12 @@ namespace Cosmetics.Core
             products.Add(shampoo);
             return shampoo;
         }
-
+        public ICream CreateCream(string name, string brand, decimal price, GenderType gender, ScentType scentType)
+        {
+            Cream cream = new Cream(name, brand, price,gender, scentType);
+            products.Add(cream);
+            return cream;
+        }
         public IToothpaste CreateToothpaste(string name, string brand, decimal price, GenderType genderType, string ingredients)
         {
             Toothpaste toothpaste = new Toothpaste(name, brand, price, genderType, ingredients);
