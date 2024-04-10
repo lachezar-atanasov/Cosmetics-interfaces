@@ -18,15 +18,21 @@ namespace Cosmetics.Commands
         public override string Execute()
         {
 
-/*            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
-            string name = this.CommandParameters[0];
-            string brand = this.CommandParameters[1];
-            decimal price = ParseDecimalParameter(this.CommandParameters[2], "Price");
-            GenderType gender = ParseGenderType(this.CommandParameters[3]);
-*/
+            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
+            string name = CommandParameters[0];
 
+            if (Repository.ProductExists(name))
+            {
+                throw new ArgumentException("Product already exists! ");
+            }
 
-            throw new ArgumentException();
+            string brand = CommandParameters[1];
+            decimal price = ParseDecimalParameter(CommandParameters[2], "Price");
+            GenderType gender = ParseGenderType(CommandParameters[3]);
+            string ingredients = CommandParameters[4];
+
+            Repository.CreateToothpaste(name, brand, price, gender, ingredients);
+            return $"Toothpaste with name {name} was created!";
 
         }
     }

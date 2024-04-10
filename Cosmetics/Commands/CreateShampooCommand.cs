@@ -20,6 +20,12 @@ namespace Cosmetics.Commands
         {
             ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
             string name = CommandParameters[0];
+
+            if (Repository.ProductExists(name))
+            {
+                throw new ArgumentException("Product already exists! ");
+            }
+
             string brand = CommandParameters[1];
             decimal price = ParseDecimalParameter(CommandParameters[2],"Price");
             GenderType gender = ParseGenderType(CommandParameters[3]);
@@ -27,7 +33,6 @@ namespace Cosmetics.Commands
             UsageType usageType = ParseUsageType(CommandParameters[5]);
 
             Repository.CreateShampoo(name, brand, price, gender, milliliters, usageType);
-
             return $"Shampoo with name {name} was created!";
         }
 
