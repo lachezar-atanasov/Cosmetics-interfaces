@@ -59,13 +59,10 @@ namespace Cosmetics.Models
 
         public override string Print()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"#{Name} {Brand}");
-            sb.AppendLine($"#Price: {Price}");
-            sb.AppendLine($"#Gender: {Gender}");
-            sb.AppendLine($"#Milliliters: {Millilitres}");
-            sb.AppendLine($"#Usage: {Usage}");
-            sb.AppendLine($"===");
+            StringBuilder sb = new StringBuilder(GetProductBaseInfo());
+            sb.AppendLine($" #Milliliters: {Millilitres}");
+            sb.AppendLine($" #Usage: {Usage}");
+            sb.AppendLine($" ===");
             return sb.ToString();
         }
     }

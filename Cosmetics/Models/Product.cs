@@ -1,6 +1,7 @@
 ﻿using Cosmetics.Helpers;
 using Cosmetics.Models.Contracts;
 using Cosmetics.Models.Enums;
+using System.Text;
 
 namespace Cosmetics.Models
 {
@@ -73,6 +74,14 @@ namespace Cosmetics.Models
         }
 
         public abstract string Print();
+        public string GetProductBaseInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"#{Name} {Brand}");
+            sb.AppendLine($" #Price: {Price}");
+            sb.AppendLine($" #Gender: {Gender}");
+            return sb.ToString();
+        }
         public abstract void ValidateName(string name);
         public abstract void ValidateBrand(string brand);
         public abstract void ValidatePrice(decimal price);

@@ -51,12 +51,9 @@ namespace Cosmetics.Models
         public override string Print()
         {
             string commaSeparatedIngredients = String.Join(", ",Ingredients.Split(","));
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"#{Name} {Brand}");
-            sb.AppendLine($"#Price: {Price}");
-            sb.AppendLine($"#Gender: {Gender}");
-            sb.AppendLine($"#Ingredients: {commaSeparatedIngredients}");
-            sb.AppendLine($"===");
+            StringBuilder sb = new StringBuilder(GetProductBaseInfo());
+            sb.AppendLine($" #Ingredients: {commaSeparatedIngredients}");
+            sb.AppendLine($" ===");
             return sb.ToString();
         }
     }
