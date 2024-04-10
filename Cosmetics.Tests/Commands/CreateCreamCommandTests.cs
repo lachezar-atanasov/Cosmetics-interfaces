@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using Cosmetics.Commands;
 using Cosmetics.Commands.Contracts;
 using Cosmetics.Core;
@@ -129,4 +129,3 @@ namespace Cosmetics.Tests.Commands
 		}
 	}
 }
-*/

@@ -99,7 +99,6 @@ namespace Cosmetics.Tests.Core
 			Assert.AreEqual(1, repository.Products.Count);
         }
 
-        /*
 		[TestMethod]
 		public void CreateCream_Should_AddProductToList()
 		{
@@ -114,7 +113,6 @@ namespace Cosmetics.Tests.Core
 			// Assert
 			Assert.AreEqual(1, repository.Products.Count);
 		}
-        */
 
 		[TestMethod]
         public void FindCategoryByName_Should_ThrowException_When_CategoryDoesNotExist()
