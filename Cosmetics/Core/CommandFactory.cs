@@ -29,9 +29,9 @@ namespace Cosmetics.Core
                 case CommandType.CreateCategory:
                     return new CreateCategoryCommand(commandParameters, repository);
                 case CommandType.CreateShampoo:
-                    throw new NotImplementedException("Not implemented yet.");
+                    return new CreateShampooCommand(commandParameters, repository);
                 case CommandType.CreateToothpaste:
-                    throw new NotImplementedException("Not implemented yet.");
+                    return new CreateToothpasteCommand(commandParameters, repository);
                 case CommandType.AddToCategory:
                     return new AddToCategoryCommand(commandParameters, repository);
                 case CommandType.RemoveFromCategory:

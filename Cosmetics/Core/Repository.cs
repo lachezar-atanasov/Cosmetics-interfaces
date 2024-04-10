@@ -4,6 +4,7 @@ using Cosmetics.Models.Contracts;
 using Cosmetics.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cosmetics.Core
 {
@@ -53,12 +54,16 @@ namespace Cosmetics.Core
 
         public IShampoo CreateShampoo(string name, string brand, decimal price, GenderType genderType, int millilitres, UsageType usageType)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            Shampoo shampoo = new Shampoo(name,  brand, price,genderType, millilitres,  usageType);
+            products.Add(shampoo);
+            return shampoo;
         }
 
         public IToothpaste CreateToothpaste(string name, string brand, decimal price, GenderType genderType, string ingredients)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            Toothpaste toothpaste = new Toothpaste(name, brand, price, genderType, ingredients);
+            products.Add(toothpaste);
+            return toothpaste;
         }
 
         public ICategory FindCategoryByName(string categoryName)
@@ -76,7 +81,8 @@ namespace Cosmetics.Core
 
         public IProduct FindProductByName(string productName)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            return products.FirstOrDefault(x => x.Name == productName) ?? 
+                throw new ArgumentException("There is no product with that name. ");
         }
 
         public bool CategoryExists(string categoryName)

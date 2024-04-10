@@ -52,6 +52,13 @@ namespace Cosmetics.Commands
             }
             throw new ArgumentException($"None of the enums in GenderType match the value {value}.");
         }
-
+        protected UsageType ParseUsageType(string value)
+        {
+            if (Enum.TryParse(value, true, out UsageType result))
+            {
+                return result;
+            }
+            throw new ArgumentException($"None of the enums in UsageType match the value {value}.");
+        }
     }
 }

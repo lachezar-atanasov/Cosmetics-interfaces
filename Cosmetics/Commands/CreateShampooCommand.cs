@@ -1,4 +1,6 @@
 ﻿using Cosmetics.Core.Contracts;
+using Cosmetics.Helpers;
+using Cosmetics.Models.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -11,11 +13,22 @@ namespace Cosmetics.Commands
         public CreateShampooCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
+
         }
 
         public override string Execute()
         {
-            throw new NotImplementedException("Not implemented yet.");
+            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
+            string name = CommandParameters[0];
+            string brand = CommandParameters[1];
+            decimal price = ParseDecimalParameter(CommandParameters[2],"Price");
+            GenderType gender = ParseGenderType(CommandParameters[3]);
+            int milliliters = ParseIntParameter(CommandParameters[4], "Milliliters");
+            UsageType usageType = ParseUsageType(CommandParameters[5]);
+
+            Repository.CreateShampoo(name, brand, price, gender, milliliters, usageType);
+
+            return $"Shampoo with name {name} was created!";
         }
 
     }
