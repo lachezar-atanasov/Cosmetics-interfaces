@@ -2,8 +2,9 @@
 {
     public enum CommandType
     {
-        AddToCategory,
+        AddProductToCategory,
         AddToShoppingCart,
+        CreateProduct,
         CreateCategory,
         CreateShampoo,
         CreateCream,

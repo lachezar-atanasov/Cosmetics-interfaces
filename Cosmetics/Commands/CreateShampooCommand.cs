@@ -18,7 +18,6 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
             string name = CommandParameters[0];
 
             if (Repository.ProductExists(name))

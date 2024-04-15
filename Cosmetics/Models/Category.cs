@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Models
 {
@@ -29,7 +30,7 @@ namespace Cosmetics.Models
             }
             private set
             {
-                ValidationHelper.ValidateStringLength(value, NameMinLength, NameMaxLength);
+                ValidationHelper.ValidateStringLength(value, NameMinLength, NameMaxLength, "Category name");
                 this.name = value;
             }
         }
@@ -53,7 +54,7 @@ namespace Cosmetics.Models
 
             if (productFound == null)
             {
-                throw new ArgumentException(ProductNotFoundErrorMessage);
+                throw new InvalidInputException(ProductNotFoundErrorMessage);
             }
 
             this.products.Remove(productFound);
@@ -71,7 +72,7 @@ namespace Cosmetics.Models
 
             foreach (var product in this.products)
             {
-                strBuilder.AppendLine(product.Print());
+                strBuilder.Append(product.Print());
             }
 
             return strBuilder.ToString().Trim();

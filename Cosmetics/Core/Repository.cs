@@ -1,4 +1,5 @@
 ﻿using Cosmetics.Core.Contracts;
+using Cosmetics.Exceptions;
 using Cosmetics.Models;
 using Cosmetics.Models.Contracts;
 using Cosmetics.Models.Enums;
@@ -37,7 +38,6 @@ namespace Cosmetics.Core
                 return new List<ICategory>(this.categories);
             }
         }
-
         public IList<IProduct> Products
         {
             get
@@ -51,7 +51,12 @@ namespace Cosmetics.Core
             ICategory category = new Category(categoryToAdd);
             this.categories.Add(category);
         }
-
+        public IProduct CreateProduct(string name, string brand, decimal price, GenderType gender)
+        {
+            Product product = new Product(name, brand, price, gender);
+            this.products.Add(product);
+            return product;
+        }
         public IShampoo CreateShampoo(string name, string brand, decimal price, GenderType genderType, int millilitres, UsageType usageType)
         {
             Shampoo shampoo = new Shampoo(name,  brand, price,genderType, millilitres,  usageType);
@@ -81,13 +86,13 @@ namespace Cosmetics.Core
                 }
             }
 
-            throw new ArgumentException($"Category {categoryName} does not exist!");
+            throw new InvalidInputException($"Category {categoryName} does not exist!");
         }
 
         public IProduct FindProductByName(string productName)
         {
             return products.FirstOrDefault(x => x.Name == productName) ?? 
-                throw new ArgumentException("There is no product with that name. ");
+                throw new InvalidInputException("There is no product with that name. ");
         }
 
         public bool CategoryExists(string categoryName)

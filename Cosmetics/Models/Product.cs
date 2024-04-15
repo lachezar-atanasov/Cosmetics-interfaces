@@ -5,12 +5,16 @@ using System.Text;
 
 namespace Cosmetics.Models
 {
-    public abstract class Product : IProduct
+    public class Product : IProduct
     {
-        private string name;
-        private string brand;
-        private decimal price;
-        private GenderType gender;
+        private const int NameMinLength = 3;
+        private const int NameMaxLength = 10;
+        private const int BrandMinLength = 2;
+        private const int BrandMaxLength = 10;
+        private string _name;
+        private string _brand;
+        private decimal _price;
+        private GenderType _gender;
 
         public Product(string name, string brand, decimal price, GenderType gender) 
         {
@@ -25,12 +29,12 @@ namespace Cosmetics.Models
         {
             get
             {
-                return name;
+                return _name;
             }
             set
             {
                 ValidateName(value);
-                name = value;
+                _name = value;
             }
         }
 
@@ -38,12 +42,12 @@ namespace Cosmetics.Models
         {
             get
             {
-                return brand;
+                return _brand;
             }
             set
             {
                 ValidateBrand(value);
-                brand = value;
+                _brand = value;
             }
         }
 
@@ -52,12 +56,12 @@ namespace Cosmetics.Models
         {
             get
             {
-                return price;
+                return _price;
             }
             set
             {
                 ValidatePrice(value);
-                price = value;
+                _price = value;
             }
         }
 
@@ -65,15 +69,20 @@ namespace Cosmetics.Models
         {
             get
             {
-                return gender;
+                return _gender;
             }
             set
             {
-                gender = value;
+                _gender = value;
             }
         }
 
-        public abstract string Print();
+        public virtual string Print()
+        {
+            StringBuilder sb = new StringBuilder(GetProductBaseInfo());
+            sb.AppendLine($" ===");
+            return sb.ToString();
+        }
         public string GetProductBaseInfo()
         {
             StringBuilder sb = new StringBuilder();
@@ -82,8 +91,18 @@ namespace Cosmetics.Models
             sb.AppendLine($" #Gender: {Gender}");
             return sb.ToString();
         }
-        public abstract void ValidateName(string name);
-        public abstract void ValidateBrand(string brand);
-        public abstract void ValidatePrice(decimal price);
+
+        public virtual void ValidateName(string name)
+        {
+            ValidationHelper.ValidateStringLength(name, NameMinLength, NameMaxLength,"Product name");
+        }
+        public virtual void ValidateBrand(string brand)
+        {
+            ValidationHelper.ValidateStringLength(brand, BrandMinLength, BrandMaxLength, "Product brand");
+        }
+        public virtual void ValidatePrice(decimal price)
+        {
+            ValidationHelper.ValidateNonNegative(price, "Price");
+        }
     }
 }

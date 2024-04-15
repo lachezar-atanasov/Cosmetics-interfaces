@@ -1,5 +1,6 @@
 ﻿using Cosmetics.Commands.Contracts;
 using Cosmetics.Core.Contracts;
+using Cosmetics.Exceptions;
 using Cosmetics.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace Cosmetics.Commands
             {
                 return result;
             }
-            throw new ArgumentException($"Invalid value for {parameterName}. Should be an integer number.");
+            throw new InvalidInputException($"Invalid value for {parameterName}. Should be an integer number.");
         }
 
         protected decimal ParseDecimalParameter(string value, string parameterName)
@@ -41,7 +42,7 @@ namespace Cosmetics.Commands
             {
                 return result;
             }
-            throw new ArgumentException($"Invalid value for {parameterName}. Should be a real number.");
+            throw new InvalidInputException($"Invalid value for {parameterName}. Should be a real number.");
         }
 
         protected GenderType ParseGenderType(string value)
@@ -50,7 +51,7 @@ namespace Cosmetics.Commands
             {
                 return result;
             }
-            throw new ArgumentException($"None of the enums in GenderType match the value {value}.");
+            throw new InvalidInputException($"None of the enums in GenderType match the value {value}.");
         }
         protected UsageType ParseUsageType(string value)
         {
@@ -58,7 +59,7 @@ namespace Cosmetics.Commands
             {
                 return result;
             }
-            throw new ArgumentException($"None of the enums in UsageType match the value {value}.");
+            throw new InvalidInputException($"None of the enums in UsageType match the value {value}.");
         }
 
         protected ScentType ParseScentType(string value)
@@ -67,7 +68,7 @@ namespace Cosmetics.Commands
             {
                 return result;
             }
-            throw new ArgumentException($"None of the enums in UsageType match the value {value}.");
+            throw new InvalidInputException($"None of the enums in UsageType match the value {value}.");
         }
     }
 }

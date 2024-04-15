@@ -17,7 +17,7 @@ namespace Cosmetics.Core.Contracts
         ICategory FindCategoryByName(string categoryName);
 
         void CreateCategory(string categoryToAdd);
-
+        IProduct CreateProduct(string name, string brand, decimal price, GenderType genderType);
         IShampoo CreateShampoo(string name, string brand, decimal price, GenderType genderType, int millilitres, UsageType usageType);
         ICream CreateCream(string name, string brand, decimal price, GenderType genderType, ScentType scentType);
 

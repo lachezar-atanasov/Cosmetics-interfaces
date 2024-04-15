@@ -4,6 +4,8 @@ using Cosmetics.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Cosmetics.Commands.Enums;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Commands
 {
@@ -18,18 +20,27 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
+            int numberOfParameters = CommandParameters.Count;
+            ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments, nameof(CommandType.CreateCategory));
 
             string categoryName = this.CommandParameters[0];
-
             return CreateCategory(categoryName);
         }
 
         private string CreateCategory(string categoryName)
         {
+            if (string.IsNullOrEmpty(categoryName))
+            {
+                throw new InvalidInputException("Category name cannot be null or empty.");
+            }
+
+            if (categoryName.Length<3 || categoryName.Length>10)
+            {
+                throw new InvalidInputException("Category name should be between 3 and 10 symbols.");
+            }
             if (this.Repository.CategoryExists(categoryName))
             {
-                throw new ArgumentException(string.Format($"Category with name {categoryName} already exists!"));
+                throw new DuplicatedEntityException(string.Format($"Category with name {categoryName} already exists!"));
             }
 
             this.Repository.CreateCategory(categoryName);

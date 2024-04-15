@@ -20,18 +20,6 @@ namespace Cosmetics.Models
         {
             Ingredients = ingredients;
         }
-        public override void ValidateName(string name)
-        {
-            ValidationHelper.ValidateStringLength(name, NameMinLength, NameMaxLength);
-        }
-        public override void ValidateBrand(string brand)
-        {
-            ValidationHelper.ValidateStringLength(brand, BrandMinLength, BrandMaxLength);
-        }
-        public override void ValidatePrice(decimal price)
-        {
-            ValidationHelper.ValidateNonNegative(price, "Price");
-        }
         public string Ingredients
         {
             get

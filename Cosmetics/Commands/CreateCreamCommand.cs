@@ -3,6 +3,7 @@ using Cosmetics.Helpers;
 using Cosmetics.Models.Enums;
 using System;
 using System.Collections.Generic;
+using Cosmetics.Commands.Enums;
 
 namespace Cosmetics.Commands
 {
@@ -18,7 +19,8 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
+            int numberOfParameters = CommandParameters.Count;
+            ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments, nameof(CommandType.CreateCream));
             string name = CommandParameters[0];
 
             if (Repository.ProductExists(name))

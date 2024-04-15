@@ -2,6 +2,7 @@
 using Cosmetics.Helpers;
 using Cosmetics.Models.Contracts;
 using System.Collections.Generic;
+using Cosmetics.Commands.Enums;
 
 namespace Cosmetics.Commands
 {
@@ -16,8 +17,11 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
-            
+            int numberOfParameters = CommandParameters.Count;
+            ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments, 
+                nameof(CommandType.RemoveFromShoppingCart));
+
+
             string productToRemove = this.CommandParameters[0];
 
             return RemoveFromShoppingCart(productToRemove);

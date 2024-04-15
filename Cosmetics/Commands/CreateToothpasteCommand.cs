@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Cosmetics.Helpers;
 using Cosmetics.Models.Enums;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Commands
 {
@@ -18,12 +19,11 @@ namespace Cosmetics.Commands
         public override string Execute()
         {
 
-            ValidationHelper.ValidateArgumentsCount(this.CommandParameters, ExpectedNumberOfArguments);
             string name = CommandParameters[0];
 
             if (Repository.ProductExists(name))
             {
-                throw new ArgumentException("Product already exists! ");
+                throw new InvalidInputException("Product already exists! ");
             }
 
             string brand = CommandParameters[1];

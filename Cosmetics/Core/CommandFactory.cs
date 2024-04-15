@@ -4,6 +4,7 @@ using Cosmetics.Commands.Enums;
 using Cosmetics.Core.Contracts;
 using System;
 using System.Collections.Generic;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Core
 {
@@ -27,14 +28,16 @@ namespace Cosmetics.Core
             switch (commandType)
             {
                 case nameof(CommandType.CreateCategory):
-                    return new CreateCategoryCommand(commandParameters, repository);
+                    return new CreateCategoryCommand(commandParameters, repository); 
+                case nameof(CommandType.CreateProduct):
+                    return new CreateProduct(commandParameters, repository);
                 case nameof(CommandType.CreateShampoo):
                     return new CreateShampooCommand(commandParameters, repository);
                 case nameof(CommandType.CreateCream):
                     return new CreateCreamCommand(commandParameters, repository);
                 case nameof(CommandType.CreateToothpaste):
                     return new CreateToothpasteCommand(commandParameters, repository);
-                case nameof(CommandType.AddToCategory):
+                case nameof(CommandType.AddProductToCategory):
                     return new AddToCategoryCommand(commandParameters, repository);
                 case nameof(CommandType.RemoveFromCategory):
                     return new RemoveFromCategoryCommand(commandParameters, repository);
@@ -47,7 +50,7 @@ namespace Cosmetics.Core
                 case nameof(CommandType.TotalPrice):
                     return new TotalPriceCommand(repository);
                 default:
-                    throw new ArgumentException($"Command with name: {commandType} doesn't exist!");
+                    throw new InvalidInputException($"Command with name: {commandType} is not supported!");
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Cosmetics.Commands.Contracts;
 using Cosmetics.Core.Contracts;
+using Cosmetics.Exceptions;
 using System;
 
 namespace Cosmetics.Core
@@ -9,11 +10,11 @@ namespace Cosmetics.Core
         private const string TerminationCommand = "Exit";
         private const string EmptyCommandError = "Command cannot be empty.";
 
-        private readonly ICommandFactory commandFactory;
+        private readonly ICommandFactory _commandFactory;
 
         public Engine(ICommandFactory commandFactory)
         {
-            this.commandFactory = commandFactory;
+            this._commandFactory = commandFactory;
         }
 
         public void Start()
@@ -22,33 +23,35 @@ namespace Cosmetics.Core
             {
                 try
                 {
-                    string inputLine = Console.ReadLine().Trim();
+                    string inputLine = Console.ReadLine();
 
-                    if (inputLine == string.Empty)
+                    if (string.IsNullOrEmpty(inputLine))
                     {
-                        Console.WriteLine(EmptyCommandError);
-                        continue;
+                        throw new InvalidInputException(EmptyCommandError);
                     }
+
+                    inputLine = inputLine.Trim();
 
                     if (inputLine.Equals(TerminationCommand, StringComparison.InvariantCultureIgnoreCase))
                     {
                         break;
                     }
 
-                    ICommand command = this.commandFactory.Create(inputLine);
+                    ICommand command = this._commandFactory.Create(inputLine);
                     string result = command.Execute();
                     Console.WriteLine(result.Trim());
                 }
+                catch (InvalidInputException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (DuplicatedEntityException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
                 catch (Exception ex)
                 {
-                    if (!string.IsNullOrEmpty(ex.Message))
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                    else
-                    {
-                        Console.WriteLine(ex);
-                    }
+                    Console.WriteLine($"{ex.GetType()}: {ex.Message}"); 
                 }
             }
         }
