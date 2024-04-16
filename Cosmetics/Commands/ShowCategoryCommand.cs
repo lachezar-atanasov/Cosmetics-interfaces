@@ -21,14 +21,14 @@ namespace Cosmetics.Commands
             ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments,
                 nameof(CommandType.ShowCategory));
 
-            string categoryToShow = this.CommandParameters[0];
+            string categoryToShow = CommandParameters[0];
 
             return ShowCategory(categoryToShow);
         }
 
         private string ShowCategory(string categoryName)
         {
-            ICategory category = this.Repository.FindCategoryByName(categoryName);
+            ICategory category = Repository.FindCategoryByName(categoryName);
 
             return category.Print();
         }

@@ -23,7 +23,7 @@ namespace Cosmetics.Commands
             int numberOfParameters = CommandParameters.Count;
             ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments, nameof(CommandType.CreateCategory));
 
-            string categoryName = this.CommandParameters[0];
+            string categoryName = CommandParameters[0];
             return CreateCategory(categoryName);
         }
 
@@ -38,12 +38,12 @@ namespace Cosmetics.Commands
             {
                 throw new InvalidInputException("Category name should be between 3 and 10 symbols.");
             }
-            if (this.Repository.CategoryExists(categoryName))
+            if (Repository.CategoryExists(categoryName))
             {
                 throw new DuplicatedEntityException(string.Format($"Category with name {categoryName} already exists!"));
             }
 
-            this.Repository.CreateCategory(categoryName);
+            Repository.CreateCategory(categoryName);
 
             return $"Category with name {categoryName} was created!";
         }

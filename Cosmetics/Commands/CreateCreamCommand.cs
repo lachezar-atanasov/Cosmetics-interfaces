@@ -4,6 +4,7 @@ using Cosmetics.Models.Enums;
 using System;
 using System.Collections.Generic;
 using Cosmetics.Commands.Enums;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Commands
 {
@@ -25,7 +26,7 @@ namespace Cosmetics.Commands
 
             if (Repository.ProductExists(name))
             {
-                throw new ArgumentException("Product already exists! ");
+                throw new InvalidInputException("Product already exists! ");
             }
 
             string brand = CommandParameters[1];

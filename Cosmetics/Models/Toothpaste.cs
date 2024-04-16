@@ -22,10 +22,7 @@ namespace Cosmetics.Models
         }
         public string Ingredients
         {
-            get
-            {
-                return _ingredients;
-            }
+            get => _ingredients;
             set
             {
                 if(String.IsNullOrEmpty(value))

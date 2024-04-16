@@ -5,7 +5,7 @@ using Cosmetics.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
-
+using Cosmetics.Exceptions;
 using static Cosmetics.Tests.Helpers.TestData;
 
 namespace Cosmetics.Tests.Core
@@ -117,7 +117,7 @@ namespace Cosmetics.Tests.Core
 		[TestMethod]
         public void FindCategoryByName_Should_ThrowException_When_CategoryDoesNotExist()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsException<InvalidInputException>(
                 () => repository.FindCategoryByName(CategoryData.ValidName));
         }
 

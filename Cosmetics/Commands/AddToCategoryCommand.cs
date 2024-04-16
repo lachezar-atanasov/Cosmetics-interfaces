@@ -17,19 +17,19 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            int numberOfParameters = CommandParameters.Count; 
+            var numberOfParameters = CommandParameters.Count; 
             ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments,nameof(CommandType.AddProductToCategory));
 
-            string categoryName = this.CommandParameters[0];
-            string productNameToAdd = this.CommandParameters[1];
+            var categoryName = CommandParameters[0];
+            var productNameToAdd = CommandParameters[1];
 
             return AddToCategory(categoryName, productNameToAdd);
         }
 
         private string AddToCategory(string categoryName, string productName)
         {
-            ICategory category = this.Repository.FindCategoryByName(categoryName);
-            IProduct product = this.Repository.FindProductByName(productName);
+            var category = Repository.FindCategoryByName(categoryName);
+            var product = Repository.FindProductByName(productName);
 
             category.AddProduct(product);
 

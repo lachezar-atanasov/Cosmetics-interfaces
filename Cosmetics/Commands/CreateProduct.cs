@@ -41,7 +41,7 @@ namespace Cosmetics.Commands
             {
                 throw new DuplicateNameException($"Product with name {name} already exists! ");
             }
-            this.Repository.CreateProduct(name, brand, price, gender);
+            Repository.CreateProduct(name, brand, price, gender);
 
             return $"Product with name {name} was created!";
         }

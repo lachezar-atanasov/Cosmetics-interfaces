@@ -4,7 +4,7 @@ using Cosmetics.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
-
+using Cosmetics.Exceptions;
 using static Cosmetics.Tests.Helpers.TestData;
 
 namespace Cosmetics.Tests.Models
@@ -15,7 +15,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_NameLengthOutOfBounds()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Category(CategoryData.InvalidName));
+            Assert.ThrowsException<InvalidInputException>(() => new Category(CategoryData.InvalidName));
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace Cosmetics.Tests.Models
             IProduct product = TestHelpers.InitializeTestProduct();
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => category.RemoveProduct(product));
+            Assert.ThrowsException<InvalidInputException>(() => category.RemoveProduct(product));
         }
 
         [TestMethod]

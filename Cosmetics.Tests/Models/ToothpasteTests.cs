@@ -2,7 +2,7 @@
 using Cosmetics.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-
+using Cosmetics.Exceptions;
 using static Cosmetics.Tests.Helpers.TestData;
 
 namespace Cosmetics.Tests.Models
@@ -13,7 +13,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_NameLengthOutOfBounds()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsException<InvalidInputException>(() =>
                 new Toothpaste(
                     name: ToothpasteData.InvalidName,
                     brand: ToothpasteData.ValidBrand,
@@ -25,7 +25,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_BrandLengthOutOfBounds()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsException<InvalidInputException>(() =>
                 new Toothpaste(
                     name: ToothpasteData.ValidName,
                     brand: ToothpasteData.InvalidBrand,
@@ -37,7 +37,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_PriceIsNegative()
         {
-			Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+			Assert.ThrowsException<InvalidInputException>(() =>
 				new Toothpaste(
 					name: ToothpasteData.ValidName,
 					brand: ToothpasteData.ValidBrand,

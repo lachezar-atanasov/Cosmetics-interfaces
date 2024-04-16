@@ -21,16 +21,16 @@ namespace Cosmetics.Commands
             ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments,
                 nameof(CommandType.RemoveFromCategory));
 
-            string categoryName = this.CommandParameters[0];
-            string productNameToRemove = this.CommandParameters[1];
+            string categoryName = CommandParameters[0];
+            string productNameToRemove = CommandParameters[1];
 
             return RemoveFromCategory(categoryName, productNameToRemove);
         }
 
         private string RemoveFromCategory(string categoryName, string productName)
         {
-            ICategory category = this.Repository.FindCategoryByName(categoryName);
-            IProduct product = this.Repository.FindProductByName(productName);
+            ICategory category = Repository.FindCategoryByName(categoryName);
+            IProduct product = Repository.FindProductByName(productName);
 
             category.RemoveProduct(product);
 

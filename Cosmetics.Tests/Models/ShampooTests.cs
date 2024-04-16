@@ -2,7 +2,7 @@
 using Cosmetics.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-
+using Cosmetics.Exceptions;
 using static Cosmetics.Tests.Helpers.TestData;
 
 namespace Cosmetics.Tests.Models
@@ -14,7 +14,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_NameLengthOutOfBounds()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsException<InvalidInputException>(() =>
                 new Shampoo(
                     name: ShampooData.InvalidName,
                     brand: ShampooData.ValidBrand,
@@ -27,7 +27,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_BrandLengthOutOfBounds()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsException<InvalidInputException>(() =>
                 new Shampoo(
                     name: ShampooData.ValidName,
                     brand: ShampooData.InvalidBrand,
@@ -40,7 +40,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_PriceIsNegative()
         {
-			Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+			Assert.ThrowsException<InvalidInputException>(() =>
 				new Shampoo(
 					name: ShampooData.ValidName,
 					brand: ShampooData.ValidBrand,
@@ -53,7 +53,7 @@ namespace Cosmetics.Tests.Models
         [TestMethod]
         public void Constructor_Should_ThrowException_When_MillilitresAreNegative()
         {
-			Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+			Assert.ThrowsException<InvalidInputException>(() =>
 				new Shampoo(
 					name: ShampooData.ValidName,
 					brand: ShampooData.ValidBrand,

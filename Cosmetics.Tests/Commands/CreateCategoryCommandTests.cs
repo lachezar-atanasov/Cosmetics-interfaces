@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Tests.Commands
 {
@@ -34,7 +35,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new CreateCategoryCommand(TestHelpers.InitializeListWithSize(testSize), repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
 
         [TestMethod]
@@ -48,7 +49,7 @@ namespace Cosmetics.Tests.Commands
             ICommand commandCategoryExists = new CreateCategoryCommand(commandParameters, repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => commandCategoryExists.Execute());
+            Assert.ThrowsException<DuplicatedEntityException>(() => commandCategoryExists.Execute());
         }
 
         [TestMethod]

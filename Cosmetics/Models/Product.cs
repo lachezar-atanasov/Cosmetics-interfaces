@@ -27,10 +27,7 @@ namespace Cosmetics.Models
         public string Name
 
         {
-            get
-            {
-                return _name;
-            }
+            get => _name;
             set
             {
                 ValidateName(value);
@@ -40,10 +37,7 @@ namespace Cosmetics.Models
 
         public string Brand
         {
-            get
-            {
-                return _brand;
-            }
+            get => _brand;
             set
             {
                 ValidateBrand(value);
@@ -54,10 +48,7 @@ namespace Cosmetics.Models
 
         public decimal Price
         {
-            get
-            {
-                return _price;
-            }
+            get => _price;
             set
             {
                 ValidatePrice(value);
@@ -67,14 +58,8 @@ namespace Cosmetics.Models
 
         public GenderType Gender
         {
-            get
-            {
-                return _gender;
-            }
-            set
-            {
-                _gender = value;
-            }
+            get => _gender;
+            set => _gender = value;
         }
 
         public virtual string Print()

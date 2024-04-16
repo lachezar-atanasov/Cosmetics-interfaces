@@ -11,74 +11,45 @@ namespace Cosmetics.Core
 {
     public class Repository : IRepository
     {
-        private readonly List<IProduct> products;
-        private readonly List<ICategory> categories;
-        private readonly IShoppingCart shoppingCart;
-
-        public Repository()
-        {
-            this.products = new List<IProduct>();
-            this.categories = new List<ICategory>();
-
-            this.shoppingCart = new ShoppingCart();
-        }
-
-        public IShoppingCart ShoppingCart
-        {
-            get
-            {
-                return this.shoppingCart;
-            }
-        }
-
-        public IList<ICategory> Categories
-        {
-            get
-            {
-                return new List<ICategory>(this.categories);
-            }
-        }
-        public IList<IProduct> Products
-        {
-            get
-            {
-                return new List<IProduct>(this.products);
-            }
-        }
+        private readonly List<IProduct> _products = new();
+        private readonly List<ICategory> _categories = new();
+        public IShoppingCart ShoppingCart { get; } = new ShoppingCart();
+        public IList<ICategory> Categories => new List<ICategory>(_categories);
+        public IList<IProduct> Products => new List<IProduct>(_products);
 
         public void CreateCategory(string categoryToAdd)
         {
             ICategory category = new Category(categoryToAdd);
-            this.categories.Add(category);
+            _categories.Add(category);
         }
         public IProduct CreateProduct(string name, string brand, decimal price, GenderType gender)
         {
-            Product product = new Product(name, brand, price, gender);
-            this.products.Add(product);
+            Product product = new(name, brand, price, gender);
+            _products.Add(product);
             return product;
         }
         public IShampoo CreateShampoo(string name, string brand, decimal price, GenderType genderType, int millilitres, UsageType usageType)
         {
-            Shampoo shampoo = new Shampoo(name,  brand, price,genderType, millilitres,  usageType);
-            products.Add(shampoo);
+            Shampoo shampoo = new(name,  brand, price,genderType, millilitres,  usageType);
+            _products.Add(shampoo);
             return shampoo;
         }
         public ICream CreateCream(string name, string brand, decimal price, GenderType gender, ScentType scentType)
         {
-            Cream cream = new Cream(name, brand, price,gender, scentType);
-            products.Add(cream);
+            Cream cream = new(name, brand, price,gender, scentType);
+            _products.Add(cream);
             return cream;
         }
         public IToothpaste CreateToothpaste(string name, string brand, decimal price, GenderType genderType, string ingredients)
         {
-            Toothpaste toothpaste = new Toothpaste(name, brand, price, genderType, ingredients);
-            products.Add(toothpaste);
+            Toothpaste toothpaste = new(name, brand, price, genderType, ingredients);
+            _products.Add(toothpaste);
             return toothpaste;
         }
 
         public ICategory FindCategoryByName(string categoryName)
         {
-            foreach (ICategory category in categories)
+            foreach (ICategory category in _categories)
             {
                 if (category.Name == categoryName)
                 {
@@ -91,7 +62,7 @@ namespace Cosmetics.Core
 
         public IProduct FindProductByName(string productName)
         {
-            return products.FirstOrDefault(x => x.Name == productName) ?? 
+            return _products.FirstOrDefault(x => x.Name == productName) ?? 
                 throw new InvalidInputException("There is no product with that name. ");
         }
 
@@ -99,7 +70,7 @@ namespace Cosmetics.Core
         {
             bool exists = false;
 
-            foreach (ICategory category in categories)
+            foreach (ICategory category in _categories)
             {
                 if (category.Name == categoryName)
                 {
@@ -113,18 +84,7 @@ namespace Cosmetics.Core
 
         public bool ProductExists(string productName)
         {
-            bool exists = false;
-
-            foreach (IProduct product in products)
-            {
-                if (product.Name == productName)
-                {
-                    exists = true;
-                    break;
-                }
-            }
-
-            return exists;
+            return _products.Any(product => product.Name == productName);
         }
     }
 }

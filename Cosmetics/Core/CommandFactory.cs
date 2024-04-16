@@ -10,11 +10,11 @@ namespace Cosmetics.Core
 {
     public class CommandFactory : ICommandFactory
     {
-        private readonly IRepository repository;
+        private readonly IRepository _repository;
 
         public CommandFactory(IRepository repository)
         {
-            this.repository = repository;
+            _repository = repository;
         }
 
         public ICommand Create(string commandLine)
@@ -23,32 +23,32 @@ namespace Cosmetics.Core
             string[] arguments = commandLine.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
             string commandType = arguments[0];
-            List<string> commandParameters = this.ExtractCommandParameters(arguments);
+            List<string> commandParameters = ExtractCommandParameters(arguments);
 
             switch (commandType)
             {
                 case nameof(CommandType.CreateCategory):
-                    return new CreateCategoryCommand(commandParameters, repository); 
+                    return new CreateCategoryCommand(commandParameters, _repository); 
                 case nameof(CommandType.CreateProduct):
-                    return new CreateProduct(commandParameters, repository);
+                    return new CreateProduct(commandParameters, _repository);
                 case nameof(CommandType.CreateShampoo):
-                    return new CreateShampooCommand(commandParameters, repository);
+                    return new CreateShampooCommand(commandParameters, _repository);
                 case nameof(CommandType.CreateCream):
-                    return new CreateCreamCommand(commandParameters, repository);
+                    return new CreateCreamCommand(commandParameters, _repository);
                 case nameof(CommandType.CreateToothpaste):
-                    return new CreateToothpasteCommand(commandParameters, repository);
+                    return new CreateToothpasteCommand(commandParameters, _repository);
                 case nameof(CommandType.AddProductToCategory):
-                    return new AddToCategoryCommand(commandParameters, repository);
+                    return new AddToCategoryCommand(commandParameters, _repository);
                 case nameof(CommandType.RemoveFromCategory):
-                    return new RemoveFromCategoryCommand(commandParameters, repository);
+                    return new RemoveFromCategoryCommand(commandParameters, _repository);
                 case nameof(CommandType.AddToShoppingCart):
-                    return new AddToShoppingCartCommand(commandParameters, repository);
+                    return new AddToShoppingCartCommand(commandParameters, _repository);
                 case nameof(CommandType.RemoveFromShoppingCart):
-                    return new RemoveFromShoppingCartCommand(commandParameters, repository);
+                    return new RemoveFromShoppingCartCommand(commandParameters, _repository);
                 case nameof(CommandType.ShowCategory):
-                    return new ShowCategoryCommand(commandParameters, repository);
+                    return new ShowCategoryCommand(commandParameters, _repository);
                 case nameof(CommandType.TotalPrice):
-                    return new TotalPriceCommand(repository);
+                    return new TotalPriceCommand(_repository);
                 default:
                     throw new InvalidInputException($"Command with name: {commandType} is not supported!");
             }

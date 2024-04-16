@@ -14,63 +14,54 @@ namespace Cosmetics.Models
         private const int NameMaxLength = 15;
         private const string ProductNotFoundErrorMessage = "Product not found in category.";
 
-        private string name;
-        private readonly ICollection<IProduct> products;
+        private readonly string _name;
+        private readonly ICollection<IProduct> _products;
 
         public Category(string name)
         {
-            this.Name = name;
-            this.products = new List<IProduct>();
+            Name = name;
+            _products = new List<IProduct>();
         }
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-            private set
+            get => _name;
+            private init
             {
                 ValidationHelper.ValidateStringLength(value, NameMinLength, NameMaxLength, "Category name");
-                this.name = value;
+                 _name = value;
             }
         }
 
-        public ICollection<IProduct> Products
-        {
-            get
-            {
-                return new List<IProduct>(this.products);
-            }
-        }
+        public ICollection<IProduct> Products => new List<IProduct>(_products);
 
         public void AddProduct(IProduct product)
         {
-            this.products.Add(product);
+             _products.Add(product);
         }
 
         public void RemoveProduct(IProduct product)
         {
-            var productFound = this.products.FirstOrDefault(x => x.Name == product.Name);
+            var productFound = _products.FirstOrDefault(x => x.Name == product.Name);
 
             if (productFound == null)
             {
                 throw new InvalidInputException(ProductNotFoundErrorMessage);
             }
 
-            this.products.Remove(productFound);
+            _products.Remove(productFound);
         }
 
         public string Print()
         {
-            if (!this.products.Any())
+            if (!_products.Any())
             {
-                return $"#Category: {this.Name}\r\n #No products in this category";
+                return $"#Category: {Name}\r\n #No products in this category";
             }
 
             var strBuilder = new StringBuilder();
-            strBuilder.AppendLine($"#Category: {this.Name}");
+            strBuilder.AppendLine($"#Category: {Name}");
 
-            foreach (var product in this.products)
+            foreach (var product in _products)
             {
                 strBuilder.Append(product.Print());
             }

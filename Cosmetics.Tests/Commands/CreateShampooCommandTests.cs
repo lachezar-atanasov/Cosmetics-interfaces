@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Cosmetics.Exceptions;
 using static Cosmetics.Tests.Helpers.TestData;
 
 namespace Cosmetics.Tests.Commands
@@ -42,7 +42,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new CreateShampooCommand(TestHelpers.InitializeListWithSize(testSize), repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
         [TestMethod]
         public void Should_ThrowException_When_PriceInvalid()
@@ -61,7 +61,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new CreateShampooCommand(commandParameters, repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new CreateShampooCommand(commandParameters, repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new CreateShampooCommand(commandParameters, repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new CreateShampooCommand(commandParameters, repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace Cosmetics.Tests.Commands
             ICommand createDuplicateShampoo = new CreateShampooCommand(CreateShampooParameters.ToList(), repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => createDuplicateShampoo.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => createDuplicateShampoo.Execute());
         }
 
         [TestMethod]

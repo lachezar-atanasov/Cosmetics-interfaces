@@ -17,18 +17,18 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            int numberOfParameters = CommandParameters.Count;
+            var numberOfParameters = CommandParameters.Count;
             ValidationHelper.ValidateArgumentsCount(numberOfParameters, ExpectedNumberOfArguments,nameof(CommandType.AddToShoppingCart));
 
-            string productToAdd = this.CommandParameters[0];
+            var productToAdd = CommandParameters[0];
 
             return AddToShoppingCart(productToAdd);
         }
 
         private string AddToShoppingCart(string productName)
         {
-            IShoppingCart shoppingCart = this.Repository.ShoppingCart;
-            IProduct product = this.Repository.FindProductByName(productName);
+            IShoppingCart shoppingCart = Repository.ShoppingCart;
+            IProduct product = Repository.FindProductByName(productName);
 
             shoppingCart.AddProduct(product);
 

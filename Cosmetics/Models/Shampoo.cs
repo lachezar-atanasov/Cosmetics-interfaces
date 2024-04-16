@@ -23,10 +23,7 @@ namespace Cosmetics.Models
         }
         public int Millilitres
         {
-            get 
-            {
-                return _millilitres;
-            }
+            get => _millilitres;
             set
             {
                 ValidationHelper.ValidateNonNegative(value, "Millilitres");
@@ -35,14 +32,8 @@ namespace Cosmetics.Models
         }
         public UsageType Usage
         {
-            get
-            {
-                return _usage;
-            }
-            set
-            {
-                _usage = value;
-            }
+            get => _usage;
+            set => _usage = value;
         }
 
         public override string Print()

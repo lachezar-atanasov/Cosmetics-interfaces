@@ -12,7 +12,7 @@ namespace Cosmetics.Commands
 
         public override string Execute()
         {
-            IShoppingCart shoppingCart = this.Repository.ShoppingCart;
+            IShoppingCart shoppingCart = Repository.ShoppingCart;
             if (shoppingCart.Products.Count == 0)
             {
                 return "No product in shopping cart.";

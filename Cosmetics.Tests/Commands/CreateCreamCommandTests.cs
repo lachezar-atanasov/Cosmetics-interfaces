@@ -9,6 +9,7 @@ using Cosmetics.Tests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cosmetics.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using static Cosmetics.Tests.Helpers.TestData;
@@ -42,7 +43,7 @@ namespace Cosmetics.Tests.Commands
 			ICommand command = new CreateCreamCommand(TestHelpers.InitializeListWithSize(testSize), repository);
 
 			// Act, Assert
-			Assert.ThrowsException<ArgumentException>(() => command.Execute());
+			Assert.ThrowsException<InvalidInputException>(() => command.Execute());
 		}
 
 		[TestMethod]
@@ -61,7 +62,7 @@ namespace Cosmetics.Tests.Commands
 			ICommand command = new CreateCreamCommand(commandParameters, repository);
 
 			// Act, Assert
-			Assert.ThrowsException<ArgumentException>(() => command.Execute());
+			Assert.ThrowsException<InvalidInputException>(() => command.Execute());
 		}
 
 		[TestMethod]
@@ -80,7 +81,7 @@ namespace Cosmetics.Tests.Commands
 			ICommand command = new CreateCreamCommand(commandParameters, repository);
 
 			// Act, Assert
-			Assert.ThrowsException<ArgumentException>(() => command.Execute());
+			Assert.ThrowsException<InvalidInputException>(() => command.Execute());
 		}
 
 		[TestMethod]
@@ -99,7 +100,7 @@ namespace Cosmetics.Tests.Commands
 			ICommand command = new CreateCreamCommand(commandParameters, repository);
 
 			// Act, Assert
-			Assert.ThrowsException<ArgumentException>(() => command.Execute());
+			Assert.ThrowsException<InvalidInputException>(() => command.Execute());
 		}
 
 		[TestMethod]
@@ -112,7 +113,7 @@ namespace Cosmetics.Tests.Commands
 			ICommand createDuplicateCream = new CreateCreamCommand(CreateCreamParameters.ToList(), repository);
 
 			// Act, Assert
-			Assert.ThrowsException<ArgumentException>(() => createDuplicateCream.Execute());
+			Assert.ThrowsException<InvalidInputException>(() => createDuplicateCream.Execute());
 		}
 
 		[TestMethod]

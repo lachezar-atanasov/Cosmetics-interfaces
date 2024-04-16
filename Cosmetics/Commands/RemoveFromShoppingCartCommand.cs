@@ -22,15 +22,15 @@ namespace Cosmetics.Commands
                 nameof(CommandType.RemoveFromShoppingCart));
 
 
-            string productToRemove = this.CommandParameters[0];
+            string productToRemove = CommandParameters[0];
 
             return RemoveFromShoppingCart(productToRemove);
         }
 
         private string RemoveFromShoppingCart(string productName)
         {
-            IShoppingCart shoppingCart = this.Repository.ShoppingCart;
-            IProduct product = this.Repository.FindProductByName(productName);
+            IShoppingCart shoppingCart = Repository.ShoppingCart;
+            IProduct product = Repository.FindProductByName(productName);
 
             shoppingCart.RemoveProduct(product);
 

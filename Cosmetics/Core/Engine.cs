@@ -14,7 +14,7 @@ namespace Cosmetics.Core
 
         public Engine(ICommandFactory commandFactory)
         {
-            this._commandFactory = commandFactory;
+            _commandFactory = commandFactory;
         }
 
         public void Start()
@@ -37,7 +37,7 @@ namespace Cosmetics.Core
                         break;
                     }
 
-                    ICommand command = this._commandFactory.Create(inputLine);
+                    ICommand command = _commandFactory.Create(inputLine);
                     string result = command.Execute();
                     Console.WriteLine(result.Trim());
                 }

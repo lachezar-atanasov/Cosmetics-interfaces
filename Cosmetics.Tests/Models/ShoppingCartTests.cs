@@ -5,6 +5,7 @@ using Cosmetics.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Tests.Models
 {
@@ -56,7 +57,7 @@ namespace Cosmetics.Tests.Models
             IProduct product = TestHelpers.InitializeTestProduct();
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => cart.RemoveProduct(product));
+            Assert.ThrowsException<InvalidInputException>(() => cart.RemoveProduct(product));
         }
 
         [TestMethod]

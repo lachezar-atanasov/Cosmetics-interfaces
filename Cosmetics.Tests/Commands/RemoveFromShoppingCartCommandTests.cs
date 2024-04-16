@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
 using System.Collections.Generic;
+using Cosmetics.Exceptions;
 
 namespace Cosmetics.Tests.Commands
 {
@@ -33,7 +34,7 @@ namespace Cosmetics.Tests.Commands
             ICommand command = new RemoveFromShoppingCartCommand(TestHelpers.InitializeListWithSize(testSize), repository);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => command.Execute());
+            Assert.ThrowsException<InvalidInputException>(() => command.Execute());
         }
 
         [TestMethod]

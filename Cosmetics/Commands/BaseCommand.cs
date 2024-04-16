@@ -17,8 +17,8 @@ namespace Cosmetics.Commands
 
         protected BaseCommand(IList<string> parameters, IRepository repository)
         {
-            this.CommandParameters = parameters;
-            this.Repository = repository;
+            CommandParameters = parameters;
+            Repository = repository;
         }
 
         public abstract string Execute();
@@ -38,7 +38,7 @@ namespace Cosmetics.Commands
 
         protected decimal ParseDecimalParameter(string value, string parameterName)
         {
-            if (decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal result))
+            if (decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var result))
             {
                 return result;
             }
